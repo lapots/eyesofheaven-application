@@ -32,8 +32,8 @@
 
     <!-- custom scripts -->
     <script type="text/javascript">
-        var height = 600;
-        var width = 900;
+        var height = 800;
+        var width = 1200;
         var projection = d3.geoOrthographic()
             .scale((height - 10) / 2)
             .translate([width / 2, height / 2])
@@ -44,16 +44,16 @@
             .attr("height", height);
 
         var path = d3.geoPath().projection(projection);
-        var g = svg.append("g");
-
-        d3.json("https://unpkg.com/world-atlas@1/world/110m.json")
+        var wj_url = "https://unpkg.com/world-atlas@1/world/110m.json";
+        d3.json(wj_url)
             .then(function(topology) {
-                    g.selectAll("path")
-                        .data(topojson.feature(topology, topology.objects.countries).geometries)
-                        .enter()
-                            .append("path")
-                            .attr("d", path)*/
-                     console.log(topology);
+                svg.append("g")
+                    .attr("class", "countries")
+                    .selectAll("path")
+                        .data(topojson.feature(topology, topology.objects.countries).features)
+                    .enter()
+                    .append("path")
+                    .attr("d", path)
             });
     </script>
 </body>
