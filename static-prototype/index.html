@@ -15,10 +15,15 @@
     </style>
 </head>
 <body>
-    <h5 class="cursive">
-        We are eternal. We are always here. We are watching you. You won’t escape our gaze.
-        You cannot escape out gaze. We are the Eyes of Heaven, the God’s Eyes!
-    </h5>
+    <div class="container-fluid">
+        <div class="row">
+            <h5 class="cursive">
+                We are eternal. We are always here. We are watching you. You won’t escape our gaze.
+                You cannot escape out gaze. We are the Eyes of Heaven, the God’s Eyes!
+            </h5>
+            <div id="worldMap"></div>
+        </div>
+    </div>
 
     <!-- imports -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -39,13 +44,12 @@
             .translate([width / 2, height / 2])
             .precision(0.1);
 
-        var svg = d3.select("body").append("svg")
+        var svg = d3.select("#worldMap").append("svg")
             .attr("width", width)
             .attr("height", height);
 
         var path = d3.geoPath().projection(projection);
-        var wj_url = "https://unpkg.com/world-atlas@1/world/110m.json";
-        d3.json(wj_url)
+        d3.json("https://unpkg.com/world-atlas@1/world/110m.json")
             .then(function(topology) {
                 svg.append("g")
                     .attr("class", "countries")
@@ -55,6 +59,7 @@
                     .append("path")
                     .attr("d", path)
             });
+
     </script>
 </body>
 </html>
